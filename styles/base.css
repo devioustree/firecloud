@@ -8,7 +8,6 @@ html, body {
 body {
     height: 100%;
     display: block;
-    overflow: hidden;
 }
  
 section[role="region"] {
@@ -18,4 +17,17 @@ section[role="region"] {
     right: 0;
     bottom: 0;
     background: #fff;
+}
+
+[data-type="list"] li > aside img {
+    height: 4rem;
+    width: 4rem;
+    margin: 1rem 1rem 0 0;
+}
+
+#track-list li {
+    background-color: #ddd;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    padding: 0 1em;
 }
