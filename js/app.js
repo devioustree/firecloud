@@ -79,13 +79,15 @@ require(['https://connect.soundcloud.com/sdk.js'],
         
         function trackClickListener(trackURL) {
             return function() {
+                var li = this;
+                
                 var currentlySelected = document.querySelector('li.selected');
                 
                 if (currentlySelected) {
                     currentlySelected.classList.remove('selected');
                 }
                 
-                this.classList.add('selected');
+                li.classList.add('selected');
                 
                 SC.stream(trackURL, function(sound){
                     if (currentSound !== undefined) {
@@ -93,7 +95,16 @@ require(['https://connect.soundcloud.com/sdk.js'],
                     }
                     
                     currentSound = sound;
-                    currentSound.play();
+                    currentSound.play({
+                        onfinish: function() {
+                            if (li.nextSibling) {
+                                var clickEvent = document.createEvent('Event');
+                                clickEvent.initEvent('click', true, true);
+                                
+                                li.nextSibling.dispatchEvent(clickEvent);
+                            }
+                        }
+                    });
                 });
             }
         }
