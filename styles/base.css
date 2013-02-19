@@ -1,0 +1,33 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-size: 10px;
+    background-color: #fff;
+}
+ 
+body {
+    height: 100%;
+    display: block;
+}
+ 
+section[role="region"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+}
+
+[data-type="list"] li > aside img {
+    height: 4rem;
+    width: 4rem;
+    margin: 1rem 1rem 0 0;
+}
+
+#track-list li {
+    background-color: #ddd;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    padding: 0 1em;
+}
