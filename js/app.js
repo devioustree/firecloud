@@ -12,7 +12,7 @@ require(['https://connect.soundcloud.com/sdk.js'],
         function initialiseSoundCloud() {
             SC.initialize({
                 client_id: '006a65d1b4ba71d8b6633d74b5a5cf9b',
-                redirect_uri: 'http://192.168.0.128:8000/callback.html'
+                redirect_uri: 'http://devioustree.co.uk/firecloud/callback.html'
             });
         }
         
