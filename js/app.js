@@ -1,5 +1,11 @@
 require(['https://connect.soundcloud.com/sdk.js'],
     function() {
+        var accessToken = localStorage.getItem('FC.accessToken');
+        
+        if (accessToken !== null) {
+            SC.storage().setItem('SC.accessToken', accessToken);
+        }
+        
         initialiseSoundCloud();
         
         var btnSoundcloud = document.querySelector("#soundcloud-btn");
@@ -8,6 +14,10 @@ require(['https://connect.soundcloud.com/sdk.js'],
         var trackList = document.querySelector('#track-list ul');
         
         var currentSound = undefined;
+        
+        if (accessToken !== null) {
+            getTracks();
+        }
         
         function initialiseSoundCloud() {
             SC.initialize({
@@ -18,17 +28,25 @@ require(['https://connect.soundcloud.com/sdk.js'],
         
         function handleSoundcloudButtonClick() {
             SC.connect(function(){
-                SC.get("/me/activities", function(response) {
-                    var activities = response.collection;
-                    activities.forEach(parseActivity);
-                    
-                    if (response.next_href) {
-                        SC.get(response.next_href, function(response) {
-                            var activities = response.collection;
-                            activities.forEach(parseActivity);
-                        });
-                    }
-                });
+                var accessToken = SC.storage().getItem('SC.accessToken');
+                console.log(accessToken);
+                localStorage.setItem('FC.accessToken', accessToken);
+                
+                getTracks();
+            });
+        }
+        
+        function getTracks() {
+            SC.get("/me/activities", function(response) {
+                var activities = response.collection;
+                activities.forEach(parseActivity);
+                
+                if (response.next_href) {
+                    SC.get(response.next_href, function(response) {
+                        var activities = response.collection;
+                        activities.forEach(parseActivity);
+                    });
+                }
             });
         }
         
