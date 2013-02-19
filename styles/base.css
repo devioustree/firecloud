@@ -26,8 +26,12 @@ section[role="region"] {
 }
 
 #track-list li {
-    background-color: #ddd;
     background-repeat: no-repeat;
-    background-size: 100% 100%;
+    background-size: 0% 100%;
     padding: 0 1em;
+}
+
+#track-list li.selected {
+    background-color: #ddd;
+    background-size: 100% 100%;
 }

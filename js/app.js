@@ -29,7 +29,6 @@ require(['https://connect.soundcloud.com/sdk.js'],
         function handleSoundcloudButtonClick() {
             SC.connect(function(){
                 var accessToken = SC.storage().getItem('SC.accessToken');
-                console.log(accessToken);
                 localStorage.setItem('FC.accessToken', accessToken);
                 
                 getTracks();
@@ -57,6 +56,7 @@ require(['https://connect.soundcloud.com/sdk.js'],
                 
                 var trackURL = '/tracks/' + track.id;
                 var li = document.createElement('li');
+                li.style.backgroundImage = 'url('+waveformURL+')';
                 
                 var aside = document.createElement('aside');
                 var coverImage = document.createElement('img');
@@ -79,7 +79,13 @@ require(['https://connect.soundcloud.com/sdk.js'],
         
         function trackClickListener(trackURL, waveformURL) {
             return function() {
-                this.style.backgroundImage = 'url('+waveformURL+')';
+                var currentlySelected = document.querySelector('li.selected');
+                
+                if (currentlySelected) {
+                    currentlySelected.classList.remove('selected');
+                }
+                
+                this.classList.add('selected');
                 
                 SC.stream(trackURL, function(sound){
                     if (currentSound !== undefined) {
