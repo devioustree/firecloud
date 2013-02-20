@@ -1,4 +1,4 @@
-require(['https://connect.soundcloud.com/sdk.js'],
+require(['https://connect.soundcloud.com/sdk.js', 'js/lib/hammer-0.6.4.js'],
     function() {
         var accessToken = localStorage.getItem('FC.accessToken');
         
@@ -74,6 +74,9 @@ require(['https://connect.soundcloud.com/sdk.js'],
                 
                 li.addEventListener('click', trackClickListener(trackURL));
                 trackList.appendChild(li);
+                
+                var hammer = new Hammer(li);
+                hammer.onhold(trackHoldListener(track.id));
             }
         }
         
@@ -119,6 +122,26 @@ require(['https://connect.soundcloud.com/sdk.js'],
                         });
                     });
                 }
+            }
+        }
+        
+        function trackHoldListener(trackID) {
+            return function() {
+                var prompt = document.querySelector('#track-delete-confirm');
+                prompt.classList.remove('fadeOut');
+                prompt.classList.add('fadeIn');
+                
+                var cancel = prompt.querySelector('#cancel-deletion');
+                cancel.addEventListener('click', function() {
+                    prompt.classList.remove('fadeIn');
+                    prompt.classList.add('fadeOut');
+                });
+                
+                var deleteButton = prompt.querySelector('#confirm-deletion');
+                deleteButton.addEventListener('click', function() {
+                    prompt.classList.remove('fadeIn');
+                    prompt.classList.add('fadeOut');
+                });
             }
         }
     }

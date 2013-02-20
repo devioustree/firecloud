@@ -35,3 +35,25 @@ section[role="region"] {
     background-color: #ddd;
     background-size: 100% 100%;
 }
+
+#track-delete-confirm {
+    opacity: 0;
+}
+
+#track-delete-confirm.fadeIn {
+    animation: fadeIn 0.2s forwards;
+}
+
+#track-delete-confirm.fadeOut {
+    animation: fadeOut 0.2s forwards;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
