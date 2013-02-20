@@ -76,14 +76,12 @@ require(['https://connect.soundcloud.com/sdk.js', 'js/lib/hammer-0.6.4.js'],
                 
                 var hammer = new Hammer(li);
                 hammer['onhold'] =  trackHoldListener(track.id);
-                hammer['ontap'] = trackClickListener(trackURL);
+                hammer['ontap'] = trackClickListener(li, trackURL);
             }
         }
         
-        function trackClickListener(trackURL) {
+        function trackClickListener(li, trackURL) {
             return function(e) {
-                var li = e.originalEvent.currentTarget;
-                
                 var currentlySelected = document.querySelector('li.selected');
                 
                 if (currentlySelected === li) {
