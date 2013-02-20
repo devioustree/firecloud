@@ -76,7 +76,7 @@ require(['https://connect.soundcloud.com/sdk.js', 'js/lib/hammer-0.6.4.js'],
                 trackList.appendChild(li);
                 
                 var hammer = new Hammer(li);
-                li.addEventListener('hold', trackHoldListener(track.id));
+                hammer['onhold'] =  trackHoldListener(track.id);
             }
         }
         
