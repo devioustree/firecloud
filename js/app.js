@@ -90,7 +90,7 @@ require(['https://connect.soundcloud.com/sdk.js'],
                         currentSound.pause()
                     }
                 } else {
-                    if (currentlySelected !== undefined) {
+                    if (currentlySelected !== null) {
                         currentlySelected.classList.remove('selected');
                     }
                     li.classList.add('selected');
