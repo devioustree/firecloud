@@ -104,8 +104,10 @@ require(['https://connect.soundcloud.com/sdk.js', 'js/lib/hammer-0.6.4.js'],
                         currentSound = sound;
                         currentSound.play({
                             onfinish: function() {
-                                if (li.nextElementSibling) {
-                                    li.nextElementSibling.click();
+                                if (li.nextSibling) {
+                                    var clickEvent = document.createEvent('Event');
+                                    clickEvent.initEvent('click', true, true);
+                                    li.nextSibling.dispatchEvent(clickEvent);
                                 }
                             },
                             whileplaying: function() {
