@@ -39,7 +39,7 @@ require(['https://connect.soundcloud.com/sdk.js', 'js/lib/hammer-0.6.4.js'],
         buttons.forEach(function(button) {
             button.addEventListener('click', function(e) {
                 e.preventDefault();
-            }
+            });
         });
         
         function getTracks() {
