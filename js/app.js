@@ -91,7 +91,11 @@ require(['https://connect.soundcloud.com/sdk.js'],
                 
                 SC.stream(trackURL, function(sound){
                     if (currentSound !== undefined) {
-                        currentSound.stop();
+                        if (currentSound === sound) {
+                            currentSound.pause();
+                        } else {
+                            currentSound.stop();
+                        }
                     }
                     
                     currentSound = sound;
