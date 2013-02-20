@@ -35,6 +35,13 @@ require(['https://connect.soundcloud.com/sdk.js', 'js/lib/hammer-0.6.4.js'],
             });
         }
         
+        var buttons = document.querySelectorAll('button');
+        buttons.forEach(function(button) {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+            }
+        });
+        
         function getTracks() {
             SC.get("/me/activities", function(response) {
                 var activities = response.collection;
@@ -135,22 +142,6 @@ require(['https://connect.soundcloud.com/sdk.js', 'js/lib/hammer-0.6.4.js'],
                 // form.addEventListener('submit', function(e) {
                     // e.preventDefault();
                 // })
-                
-                var cancel = prompt.querySelector('#cancel-deletion');
-                cancel.addEventListener('click', function(e) {
-                    e.preventDefault(); e.stopPropagation();
-                    prompt.classList.remove('fadeIn');
-                    prompt.classList.add('fadeOut');
-                    return false;
-                });
-                
-                var deleteButton = prompt.querySelector('#confirm-deletion');
-                deleteButton.addEventListener('click', function(e) {
-                    e.preventDefault(); e.stopPropagation();
-                    prompt.classList.remove('fadeIn');
-                    prompt.classList.add('fadeOut');
-                    return false;
-                });
             }
         }
     }
