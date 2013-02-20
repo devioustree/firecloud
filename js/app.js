@@ -141,6 +141,7 @@ require(['https://connect.soundcloud.com/sdk.js', 'js/lib/hammer-0.6.4.js'],
                     e.preventDefault(); e.stopPropagation();
                     prompt.classList.remove('fadeIn');
                     prompt.classList.add('fadeOut');
+                    return false;
                 });
                 
                 var deleteButton = prompt.querySelector('#confirm-deletion');
@@ -148,6 +149,7 @@ require(['https://connect.soundcloud.com/sdk.js', 'js/lib/hammer-0.6.4.js'],
                     e.preventDefault(); e.stopPropagation();
                     prompt.classList.remove('fadeIn');
                     prompt.classList.add('fadeOut');
+                    return false;
                 });
             }
         }
