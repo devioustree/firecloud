@@ -131,16 +131,21 @@ require(['https://connect.soundcloud.com/sdk.js', 'js/lib/hammer-0.6.4.js'],
                 prompt.classList.remove('fadeOut');
                 prompt.classList.add('fadeIn');
                 
+                // var form = prompt.querySelector('form');
+                // form.addEventListener('submit', function(e) {
+                    // e.preventDefault();
+                // })
+                
                 var cancel = prompt.querySelector('#cancel-deletion');
                 cancel.addEventListener('click', function(e) {
-                    e.preventDefault();
+                    e.preventDefault(); e.stopPropagation();
                     prompt.classList.remove('fadeIn');
                     prompt.classList.add('fadeOut');
                 });
                 
                 var deleteButton = prompt.querySelector('#confirm-deletion');
                 deleteButton.addEventListener('click', function(e) {
-                    e.preventDefault();
+                    e.preventDefault(); e.stopPropagation();
                     prompt.classList.remove('fadeIn');
                     prompt.classList.add('fadeOut');
                 });
