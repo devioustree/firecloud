@@ -84,6 +84,9 @@ require(['https://connect.soundcloud.com/sdk.js', 'js/lib/hammer-0.6.4.js'],
             return function(e) {
                 var li = e.currentTarget;
                 
+                console.log(e);
+                debugger;
+                
                 var currentlySelected = document.querySelector('li.selected');
                 
                 if (currentlySelected === li) {
