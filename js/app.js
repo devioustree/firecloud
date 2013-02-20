@@ -75,7 +75,7 @@ require(['https://connect.soundcloud.com/sdk.js', 'js/lib/hammer-0.6.4.js'],
                 trackList.appendChild(li);
                 
                 var hammer = new Hammer(li);
-                hammer['onhold'] =  trackHoldListener(track.id);
+                hammer['onhold'] =  trackHoldListener(li, track.id);
                 hammer['ontap'] = trackClickListener(li, trackURL);
             }
         }
@@ -98,7 +98,7 @@ require(['https://connect.soundcloud.com/sdk.js', 'js/lib/hammer-0.6.4.js'],
                     
                     SC.stream(trackURL, function(sound){
                         if (currentSound !== undefined) {
-                            currentSound.stop();
+                            currentSound.destruct();
                         }
                         
                         currentSound = sound;
@@ -123,7 +123,7 @@ require(['https://connect.soundcloud.com/sdk.js', 'js/lib/hammer-0.6.4.js'],
             }
         }
         
-        function trackHoldListener(trackID) {
+        function trackHoldListener(li, trackID) {
             return function() {
                 var prompt = document.querySelector('#track-delete-confirm');
                 prompt.classList.remove('fadeOut');
@@ -140,6 +140,15 @@ require(['https://connect.soundcloud.com/sdk.js', 'js/lib/hammer-0.6.4.js'],
                 var deleteButton = prompt.querySelector('#confirm-deletion');
                 deleteButton.addEventListener('click', function(e) {
                     e.preventDefault();
+                    
+                    var currentlySelected = document.querySelector('li.selected');
+
+                    if (currentlySelected === li) {
+                        currentSound.destruct();
+                    }
+                    
+                    li.parentNode.removeChild(li);
+                    
                     prompt.classList.remove('fadeIn');
                     prompt.classList.add('fadeOut');
                     return false;
