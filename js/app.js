@@ -132,13 +132,15 @@ require(['https://connect.soundcloud.com/sdk.js', 'js/lib/hammer-0.6.4.js'],
                 prompt.classList.add('fadeIn');
                 
                 var cancel = prompt.querySelector('#cancel-deletion');
-                cancel.addEventListener('click', function() {
+                cancel.addEventListener('click', function(e) {
+                    e.preventDefault();
                     prompt.classList.remove('fadeIn');
                     prompt.classList.add('fadeOut');
                 });
                 
                 var deleteButton = prompt.querySelector('#confirm-deletion');
-                deleteButton.addEventListener('click', function() {
+                deleteButton.addEventListener('click', function(e) {
+                    e.preventDefault();
                     prompt.classList.remove('fadeIn');
                     prompt.classList.add('fadeOut');
                 });
