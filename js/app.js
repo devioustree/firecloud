@@ -82,10 +82,7 @@ require(['https://connect.soundcloud.com/sdk.js', 'js/lib/hammer-0.6.4.js'],
         
         function trackClickListener(trackURL) {
             return function(e) {
-                var li = e.currentTarget;
-                
-                console.log(e);
-                debugger;
+                var li = e.originalEvent.currentTarget;
                 
                 var currentlySelected = document.querySelector('li.selected');
                 
