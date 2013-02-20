@@ -83,33 +83,40 @@ require(['https://connect.soundcloud.com/sdk.js'],
                 
                 var currentlySelected = document.querySelector('li.selected');
                 
-                if (currentlySelected) {
+                if (currentlySelected === li) {
+                    if (currentSound.paused) {
+                        currentSound.resume()
+                    } else{
+                        currentSound.pause()
+                    }
+                } else {
                     currentlySelected.classList.remove('selected');
-                }
-                
-                li.classList.add('selected');
-                
-                SC.stream(trackURL, function(sound){
-                    if (currentSound !== undefined) {
-                        if (currentSound === sound) {
-                            currentSound.pause();
-                        } else {
+                    li.classList.add('selected');
+                    
+                    SC.stream(trackURL, function(sound){
+                        if (currentSound !== undefined) {
                             currentSound.stop();
                         }
-                    }
-                    
-                    currentSound = sound;
-                    currentSound.play({
-                        onfinish: function() {
-                            if (li.nextSibling) {
-                                var clickEvent = document.createEvent('Event');
-                                clickEvent.initEvent('click', true, true);
-                                
-                                li.nextSibling.dispatchEvent(clickEvent);
+                        
+                        currentSound = sound;
+                        currentSound.play({
+                            onfinish: function() {
+                                if (li.nextSibling) {
+                                    var clickEvent = document.createEvent('Event');
+                                    clickEvent.initEvent('click', true, true);
+                                    
+                                    li.nextSibling.dispatchEvent(clickEvent);
+                                }
+                            },
+                            whileplaying: function() {
+                                var position = this.position;
+                                var duration = (this.readyState == 3) ? this.duration : this.durationEstimate;
+                                var howFar = position / duration;
+                                console.log('Playing: ' + position + ' / ' + duration + ' = ' + howFar);
                             }
-                        }
+                        });
                     });
-                });
+                }
             }
         }
     }
