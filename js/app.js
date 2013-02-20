@@ -72,11 +72,11 @@ require(['https://connect.soundcloud.com/sdk.js', 'js/lib/hammer-0.6.4.js'],
                 title.innerHTML = track.title;
                 artist.innerHTML = user.username;
                 
-                li.addEventListener('click', trackClickListener(trackURL));
                 trackList.appendChild(li);
                 
                 var hammer = new Hammer(li);
                 hammer['onhold'] =  trackHoldListener(track.id);
+                hammer['ontap'] = trackClickListener(trackURL);
             }
         }
         
@@ -130,11 +130,6 @@ require(['https://connect.soundcloud.com/sdk.js', 'js/lib/hammer-0.6.4.js'],
                 var prompt = document.querySelector('#track-delete-confirm');
                 prompt.classList.remove('fadeOut');
                 prompt.classList.add('fadeIn');
-                
-                // var form = prompt.querySelector('form');
-                // form.addEventListener('submit', function(e) {
-                    // e.preventDefault();
-                // })
                 
                 var cancelButton = prompt.querySelector('#cancel-deletion');
                 cancelButton.addEventListener('click', function(e) {
